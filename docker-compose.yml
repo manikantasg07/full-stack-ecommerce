@@ -1,0 +1,26 @@
+services:
+    postgres:
+        image: postgres:15
+        environment:
+              POSTGRES_USER: postgres
+              POSTGRES_PASSWORD: Manikantaganti@2000
+              POSTGRES_DB: ecommerce_app
+        ports:
+            - "5433:5432"
+        volumes:
+          - pgdata:/var/lib/postgresql/data
+    auth_service:
+        build: ./auth-service
+        ports:
+            - "8080:3000"
+        environment:
+              DB_USER: postgres
+              DB_HOST: postgres
+              DB_PASS: Manikantaganti@2000
+              DB_NAME: ecommerce_app
+              DB_PORT: 5432
+        depends_on: 
+              - postgres
+    
+volumes:
+    pgdata:
