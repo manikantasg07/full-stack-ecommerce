@@ -1,8 +1,14 @@
 const express = require("express");
 require("dotenv").config();
-var proxy = require('express-http-proxy');
+const proxy = require('express-http-proxy');
+const cors  = require("cors");
 const app = express();
 
+let corsOptions = {
+  origin: 'http://localhost:3000',
+}
+
+app.use(cors(corsOptions))
 
 app.use(express.json());
 
